@@ -1,8 +1,9 @@
+#include <getopt.h>
+#include <ncurses.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <getopt.h>
 
 #include "clatter.h"
 
@@ -13,7 +14,7 @@ void set_theme(const char *themeName, OutputInfo *output);
 void test_input(OutputInfo *output);
 
 // theme that we'll be using for display
-Theme current_theme;
+Theme *current_theme;
 
 // do this annoying calculation once...
 int num_themes = (sizeof(themes) / sizeof(themes[0]));
@@ -54,9 +55,7 @@ void test_input(OutputInfo *output) {
   }
 }
 
-void print_instructions() {
-  printf("%s", Instructions);
-}
+void print_instructions() { printf("%s", Instructions); }
 
 void list_themes() {
   printf("Available themes:\n");
@@ -93,14 +92,15 @@ void clatter(OutputInfo *output) {
   }
 
   while ((bytes_read = getline(&buff, &buffer_size, f)) != -1) {
-    printf("%s", buff);
+    printw("%s", buff);
+    refresh();
   }
 
   free(buff);
 
   if (ferror(f)) {
     printf("Something exploded, look up how to extract information from ferror "
-           "to display to user.");
+           "to display something useful to the user.");
     exit(EXIT_FAILURE);
   }
 }
@@ -108,18 +108,22 @@ void clatter(OutputInfo *output) {
 int main(int argc, char *argv[]) {
   struct OutputInfo output;
 
-  output.theme = &themes[0]; // default theme
+  output.theme = &themes[0]; // set the default theme
 
   parse_args(argc, argv, &output);
+
   test_input(&output);
 
-  if (output.fname == NULL || output.theme == NULL) {
-    print_instructions();
+  initscr(); // initialise ncurses
 
-    return EXIT_SUCCESS; // actually, is this considered failure?
-  }
+  scrollok(stdscr, TRUE);
 
   clatter(&output);
+
+  printw("\nPress any key...\n");
+  getch();
+
+  endwin(); // ncurses clean-up
 
   return EXIT_SUCCESS;
 }

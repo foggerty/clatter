@@ -4,7 +4,7 @@
 # otherwise.
 
 CC = gcc
-CFLAGS = -Wall -Wextra -std=gnu99
+CFLAGS = -Wall -Wextra -std=gnu99 -lncurses
 
 themes = $(wildcard themes/*.c) \
          $(wildcard themes/*.h)
