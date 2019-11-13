@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <getopt.h>
 
 #include "clatter.h"
 
@@ -53,7 +54,9 @@ void test_input(OutputInfo *output) {
   }
 }
 
-void print_instructions() { printf("%s", Instructions); }
+void print_instructions() {
+  printf("%s", Instructions);
+}
 
 void list_themes() {
   printf("Available themes:\n");
@@ -92,6 +95,8 @@ void clatter(OutputInfo *output) {
   while ((bytes_read = getline(&buff, &buffer_size, f)) != -1) {
     printf("%s", buff);
   }
+
+  free(buff);
 
   if (ferror(f)) {
     printf("Something exploded, look up how to extract information from ferror "

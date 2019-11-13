@@ -6,15 +6,16 @@ But mostly, it's to help me remember how to write code in C again, because it's 
 * Milestones
 - [X] Pipe a file to stdout that's been specified in args.
 - [ ] Repeat, but use ncurses lib for display.
+- [ ] Allow to read in from stdin if a file isn't specified.
 - [ ] Simple theme, just stuttered output.
 - [ ] Sound support - no idea what the latest/greatest is in Linux these days.
-- [ ] Allow to read in from stdin if a file isn't specified.
 - [ ] Full 'Mother' theme, visuals and sounds.
 - [ ] Add another theme.
 - [ ] Repeat.
 - [ ] Make everything UTF-8 capable; how hard can it be?
 
 * ToDO
+- [ ] Look into static analysers for C.
 - [ ] Setup a make file.
 - [ ] Determine if still need .ccls file.  I have a vague memory of reading somewhere that it can leverage make files?
 - [ ] Look into 'modules' in C, and best-practices for things like the placement of the themes array, avoiding naming conflicts etc.

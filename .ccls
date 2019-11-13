@@ -1,3 +1,0 @@
-gcc
-%c -std=c18
-%c -Wall
