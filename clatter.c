@@ -6,6 +6,7 @@
 #include <unistd.h>
 
 #include "clatter.h"
+#include "curseu.h"
 
 // function prototypes
 void list_themes();
@@ -22,12 +23,15 @@ int num_themes = (sizeof(themes) / sizeof(themes[0]));
 void parse_args(int argc, char *argv[], OutputInfo *output) {
   char option;
 
-  while ((option = getopt(argc, argv, "lt:")) != -1) {
+  while ((option = getopt(argc, argv, "ldt:")) != -1) {
     switch (option) {
     case 'l':
       list_themes();
       exit(EXIT_SUCCESS);
       break;
+    case 'd':
+      dump_capabilities();
+      exit(EXIT_SUCCESS);
     case 't':
       set_theme(optarg, output);
       break;
@@ -55,7 +59,9 @@ void test_input(OutputInfo *output) {
   }
 }
 
-void print_instructions() { printf("%s", Instructions); }
+void print_instructions() {
+  printf("%s", Instructions);
+}
 
 void list_themes() {
   printf("Available themes:\n");
@@ -108,21 +114,19 @@ void clatter(OutputInfo *output) {
 int main(int argc, char *argv[]) {
   struct OutputInfo output;
 
+  // setup
   output.theme = &themes[0]; // set the default theme
-
   parse_args(argc, argv, &output);
-
   test_input(&output);
 
+  // output
   initscr(); // initialise ncurses
-
   scrollok(stdscr, TRUE);
-
   clatter(&output);
 
+  // tidy
   printw("\nPress any key...\n");
   getch();
-
   endwin(); // ncurses clean-up
 
   return EXIT_SUCCESS;

@@ -6,6 +6,7 @@ But mostly, it's to help me remember how to write code in C again, because it's 
 * Milestones
 - [X] Pipe a file to stdout that's been specified in args.
 - [X] Repeat, but use ncurses lib for display.
+- [ ] Utility function to dump terminal capabilities, based off of what ncurses thinks can be done - which is all the program can do, since we're using ncurses for all output.
 - [ ] Allow to read in from stdin (pipe) if a file isn't specified.
 - [ ] Simple theme, just stuttered output.
 - [ ] Sound support - no idea what the latest/greatest is in Linux these days.
@@ -14,8 +15,10 @@ But mostly, it's to help me remember how to write code in C again, because it's 
 - [ ] Repeat.
 - [ ] Make everything UTF-8 capable; how hard can it be?
 
+
+
 * ToDO
 - [X] Setup a make file.
-- [X] Determine if still need .ccls file.  I have a vague memory of reading somewhere that it can leverage make files?
+- [X] Determine if still need .ccls file.  I have a vague memory of reading somewhere that it can leverage make files? (It doesn't, but first call to lsp does everything it needs.)
 - [ ] Look into static analysers for C.
 - [ ] Look into 'modules' in C, and best-practices for things like the placement of the themes array, avoiding naming conflicts etc.
