@@ -9,7 +9,7 @@
 #define CURSEU_HEADER
 
 // Displays that capabilities that ncurses (thinks it) provides, based
-// off the TERMINFO database.
+// off of the TERMINFO database (I think).
 void dump_capabilities(void);
 
 /*******************************************************************************
