@@ -21,8 +21,9 @@ But mostly, it's to help me remember how to write code in C again, because it's 
 * ToDO
 - [X] Setup a make file.
 - [X] Determine if still need .ccls file.  I have a vague memory of reading somewhere that it can leverage make files? (It doesn't, but first call to lsp does everything it needs.)
-- [ ] Stop Emacs forom inserting new lines with ';'
+- [X] Stop Emacs forom inserting new lines with ';'
+- [X] Look into static analysers for C - [[https://github.com/alexmurray/flycheck-clang-analyzer][start here]]
+- [ ] Make a pull-request for ccls, correcting bloody spelling error....?
 - [ ] Update formatting to enforce whitespace between things like 'i = 0;'
-- [ ] Rename Stutter to stammer, try out refactoring tools...
-- [ ] Look into static analysers for C.
-- [ ] Look into 'modules' in C, and best-practices for things like the placement of the themes array, avoiding naming conflicts etc.
+- [ ] Rename Stutter to stammer, i.e. try out refactoring tools...
+- [ ] Look into 'modules' in C, and best-practices for things like the placement of the themes array, avoiding naming conflicts etc.  This will hurt :-(

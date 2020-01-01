@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <unistd.h>
 
 #include "clatter.h"
@@ -140,6 +141,7 @@ int main(int argc, char *argv[]) {
   struct OutputInfo output;
 
   // setup
+  srand(time(0));
   output.theme = &themes[0]; // set the default theme
   parse_args(argc, argv, &output);
   test_input(&output);
