@@ -23,7 +23,7 @@ But mostly, it's to help me remember how to write code in C again, because it's 
 - [X] Determine if still need .ccls file.  I have a vague memory of reading somewhere that it can leverage make files? (It doesn't, but first call to lsp does everything it needs.)
 - [X] Stop Emacs forom inserting new lines with ';'
 - [X] Look into static analysers for C - [[https://github.com/alexmurray/flycheck-clang-analyzer][start here]]
-- [ ] Make a pull-request for ccls, correcting bloody spelling error....?
-- [ ] Update formatting to enforce whitespace between things like 'i = 0;'
-- [ ] Rename Stutter to stammer, i.e. try out refactoring tools...
+- [X] Update formatting to enforce whitespace between things like 'i = 0;'.  NOTE: it looks like Emacs only does this on a newline (if auto-newline is enabled) or when typing something like an opening brace.  Solved - pass everything off to lsp mode :-)
+- [X] Rename Stutter to stammer, i.e. try out refactoring tools.  tl;dr they all suck for C unless you're using a full IDE.
+- [ ] Look into how C handles function pointers, and come up with a scheme for themes that allows the main program to cal things like next_char, end_of_line, new_line etc, and have the theme decide how they should be handled (can then mix and match various parts of each theme).
 - [ ] Look into 'modules' in C, and best-practices for things like the placement of the themes array, avoiding naming conflicts etc.  This will hurt :-(

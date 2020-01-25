@@ -61,9 +61,7 @@ void test_input(OutputInfo *output) {
   }
 }
 
-void print_instructions() {
-  printf("%s", Instructions);
-}
+void print_instructions() { printf("%s", Instructions); }
 
 void list_themes() {
   printf("Available themes:\n");
@@ -91,7 +89,7 @@ void clatter(OutputInfo *output) {
   char *buff = NULL;  // getline will malloc for us
   size_t buffer_size; // size of buffer allocated by getline
   ssize_t bytes_read; // excluding \0 char
-  Stutter stutter;
+  Stammer stammer;
 
   f = fopen(output->fname, "r");
 
@@ -100,31 +98,30 @@ void clatter(OutputInfo *output) {
     exit(EXIT_FAILURE);
   }
 
-  init_stutter(&stutter);
-  int char_count = stutter.print_length;
+  init_stammer(&stammer);
+
+  int chars_remaining = stammer.print_length;
   int printing = 1;
 
   while ((bytes_read = getline(&buff, &buffer_size, f)) != -1) {
     for (int i = 0; i < bytes_read; i++) {
-      // print next char
       addch(buff[i]);
       refresh();
 
-      // update index
-      char_count--;
+      chars_remaining--;
 
-      // switching from printing to stutter?
-      if (char_count <= 0) {
-        // time for new stutter values?
+      if (chars_remaining <= 0) {
+        // time for new stammer values?
         if (!printing) {
-          init_stutter(&stutter);
+          init_stammer(&stammer);
         }
 
         printing = printing ^ 1;
-        char_count = printing ? stutter.print_length : stutter.stutter_length;
+        chars_remaining =
+            printing ? stammer.print_length : stammer.stammer_length;
       }
 
-      usleep(1000 * (printing ? stutter.print_delay : stutter.stutter_delay));
+      usleep(1000 * (printing ? stammer.print_delay : stammer.stammer_delay));
     }
   }
 
