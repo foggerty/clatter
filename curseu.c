@@ -43,8 +43,6 @@ void dump_capabilities(void) {
   initscr();
   endwin();
 
-  print_capability_int("Virtual terminal number", VIRTUAL_TERMINAL);
-
   snprintf(buff, 40, "%d / %d", LINES, COLS);
   print_capability("Lines / Columns", buff);
 
@@ -56,6 +54,5 @@ void dump_capabilities(void) {
   print_capability_flag("Has a status line", HAS_STATUS_LINE);
 
   print_capability_int("Bytes buffered before printing", BUFFER_CAPACITY);
-  print_capability_int("Number of mouse buttons", BUTTONS);
   print_capability_int("Max colours", MAX_COLORS);
 }

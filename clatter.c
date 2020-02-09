@@ -55,7 +55,7 @@ void parse_args(int argc, char *argv[], OutputInfo *output) {
 
 void test_input(OutputInfo *output) {
   if (access(output->fname, F_OK | R_OK) == -1) {
-    printf("Either %s doesn't exist, or you do not have write access to it.\n",
+    printf("Either %s doesn't exist, or you do not have read access to it.\n",
            output->fname);
     exit(EXIT_FAILURE);
   }
@@ -89,7 +89,7 @@ void clatter(OutputInfo *output) {
   char *buff = NULL;  // getline will malloc for us
   size_t buffer_size; // size of buffer allocated by getline
   ssize_t bytes_read; // excluding \0 char
-  Stammer stammer;
+  Theme *theme;
 
   f = fopen(output->fname, "r");
 
@@ -98,30 +98,23 @@ void clatter(OutputInfo *output) {
     exit(EXIT_FAILURE);
   }
 
-  init_stammer(&stammer);
-
-  int chars_remaining = stammer.print_length;
-  int printing = 1;
+  theme = output->theme;
+  theme->init();
 
   while ((bytes_read = getline(&buff, &buffer_size, f)) != -1) {
     for (int i = 0; i < bytes_read; i++) {
-      addch(buff[i]);
-      refresh();
-
-      chars_remaining--;
-
-      if (chars_remaining <= 0) {
-        // time for new stammer values?
-        if (!printing) {
-          init_stammer(&stammer);
-        }
-
-        printing = printing ^ 1;
-        chars_remaining =
-            printing ? stammer.print_length : stammer.stammer_length;
+      switch (buff[i]) {
+      case ' ':
+        theme->rspace();
+        break;
+      case '\n':
+        theme->eol();
+        theme->nl();
+        break;
+      default:
+        theme->rchar(buff[i]);
+        break;
       }
-
-      usleep(1000 * (printing ? stammer.print_delay : stammer.stammer_delay));
     }
   }
 
@@ -129,7 +122,7 @@ void clatter(OutputInfo *output) {
 
   if (ferror(f)) {
     printf("Something exploded, look up how to extract information from ferror "
-           "to display something useful to the user.");
+           "so we can display something useful to the user.");
     exit(EXIT_FAILURE);
   }
 }
@@ -138,17 +131,17 @@ int main(int argc, char *argv[]) {
   struct OutputInfo output;
 
   // setup
+  parse_args(argc, argv, &output);
+  test_input(&output); // this could be less confusingly named :-)
   srand(time(0));
   output.theme = &themes[0]; // set the default theme
-  parse_args(argc, argv, &output);
-  test_input(&output);
+  initscr();                 // initialise ncurses
+  scrollok(stdscr, TRUE);    // allow ncurses to scroll terminal
 
   // output
-  initscr(); // initialise ncurses
-  scrollok(stdscr, TRUE);
-  clatter(&output);
+  clatter(&output); // print contents
 
-  // tidy
+  // tidy up
   printw("\nPress any key...\n");
   getch();
   endwin(); // ncurses clean-up
