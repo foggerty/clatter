@@ -8,13 +8,13 @@ But mostly, it's to help me remember how to write code in C again, because it's 
 - [X] Pipe a file to stdout that's been specified in args.
 - [X] Repeat, but use ncurses lib for display.
 - [X] Hard-coded (i.e. not a theme) stuttered output.
-- [ ] Simple theme, just repeat the same stuttered output, but fed in via a theme.
-- [ ] Utility function to dump terminal capabilities, based off of what ncurses thinks can be done - which is all the program can do, since we're using ncurses for all output.
-- [ ] Allow to read in from stdin (pipe) if a file isn't specified.
+- [X] Simple theme, just repeat the same stuttered output, but fed in via a theme.
+- [X] Utility function to dump terminal capabilities, based off of what ncurses thinks can be done - which is all the program can do, since we're using ncurses for all output.
 - [ ] Sound support - no idea what the latest/greatest is in Linux these days.
+- [ ] Allow to read in from stdin (pipe) if a file isn't specified.
 - [ ] Full 'Mother' theme, visuals and sounds.
 - [ ] Add another theme.
-- [ ] Repeat.
+- [ ] Repeat till bored.
 - [ ] Make everything UTF-8 capable; how hard can it be?
 
 
@@ -28,8 +28,9 @@ But mostly, it's to help me remember how to write code in C again, because it's 
 - [X] Get a quick overview of what the current sound landscape looks like.
 - [X] Look into how C handles function pointers, and come up with a scheme for themes that allows the main program to call things like next_char, end_of_line, new_line etc, and have the theme decide how they should be handled (can then mix and match various parts of each theme).
 - [X] 'port' stammer to the new theme thingie.
+- [ ] add a '-l' option to loop the file.
 - [ ] Have a play with valgrind, see if it turns anything up.
 - [ ] Add audio support......  Surely it cannot be /that/ painful....?
-- [ ] Learn how to turn off alignment features when using lsp-format-buffer
 - [ ] Make stammer go 'click' when it prints a normal char, and a deeper 'click' for when stammering.
+- [ ] Learn how to turn off alignment features when using lsp-format-buffer
 - [ ] Look into 'modules' in C, and best-practices for things like the placement of the themes array, avoiding naming conflicts etc.  This will hurt :-(
